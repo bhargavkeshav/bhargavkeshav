@@ -8,6 +8,7 @@
 #
 # Build PHP base
 #
+From python:3.9
 ARG USERNAME
 ARG PASSWORD
 
