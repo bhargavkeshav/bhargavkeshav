@@ -8,7 +8,7 @@
 #
 # Build PHP base
 #
-From python:3.9
+From docker:stable-dind
 ARG USERNAME
 ARG PASSWORD
 
