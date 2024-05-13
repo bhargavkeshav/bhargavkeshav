@@ -14,6 +14,8 @@ ARG PASSWORD
 
 RUN echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin jfrog.ais.acquia.io
 
+RUN docker pull jfrog.ais.acquia.io/devops-pipeline-dev/acq-aws-cs-grpc:codebase-service-grpc-v1
+
 FROM jfrog.ais.acquia.io/devops-pipeline-dev/acq-aws-cs-grpc:codebase-service-grpc-v1 as base
 #FROM jfrog.ais.acquia.io/devops-pipeline/acq-aws:2 as base
 USER root
