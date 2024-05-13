@@ -1,0 +1,47 @@
+#
+# Set build variables from CLI --build-arg options.
+# NOTE: An ARG set before FROM cannot be used after FROM.
+#
+#ARG BASE_IMAGE=acq-aws:2
+#ARG REPO_LOCATION
+
+#
+# Build PHP base
+#
+ARG USERNAME
+ARG PASSWORD
+
+RUN echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin jfrog.ais.acquia.io
+
+FROM jfrog.ais.acquia.io/devops-pipeline-dev/acq-aws-cs-grpc:codebase-service-grpc-v1 as base
+#FROM jfrog.ais.acquia.io/devops-pipeline/acq-aws:2 as base
+USER root
+ RUN yum update -y && \
+     yum upgrade -y
+
+# ARG PHP_VERSION
+# ARG NEWRELIC_LICENSE
+# ARG PACKAGE_NAME
+
+# RUN yum update -y && \
+#     yum upgrade -y && \
+#     yum install -y httpd && \
+#     amazon-linux-extras enable php$PHP_VERSION && \
+#     yum install -y php php-{cgi,common,curl,gd,gettext,gmp,intl,json,mbstring,mysqlnd,opcache,pear,xml,zip}
+
+# #<codebase-service-custom>
+# RUN yum install -y gcc-c++ zlib-devel php-devel && \
+#     MAKEFLAGS="-j 4" pecl install grpc
+# #</codebase-service-custom>
+
+# RUN yum install -y git zip unzip gmp-devel libicu-devel && \
+#     rpm --import https://download.newrelic.com/548C16BF.gpg && \
+#     rpm -Uvh https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm && \
+#     yum install -y newrelic-php5 && \
+#     yum clean metadata && \
+#     rm -rf /etc/httpd/conf.d/ && \
+#     mkdir -p /etc/httpd/conf.d/ && \
+#     rm -rf /etc/httpd/conf.modules.d/ && \
+#     mkdir -p /etc/httpd/conf.modules.d/ && \
+#     mkdir -p /var/cache/app && \
+#     mkdir -p /var/log/app
